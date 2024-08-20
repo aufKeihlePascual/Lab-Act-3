@@ -58,6 +58,8 @@ $contact_number = $_POST['contact_number'];
         <button id="startQuizBtn" type="submit" class="button is-link" disabled>Start Quiz</button>
     </form>
 
+
+    <!-- Start from here -->
     <script>
         const name = document.getElementById('name').value.trim();
         document.getElementById('displayName').textContent = `Hello, ${name}! Please read the instructions first.`;
