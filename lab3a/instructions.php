@@ -47,7 +47,7 @@ $contact_number = $_POST['contact_number'];
         <div class="field">
             <div class="control">
                 <label class="checkbox">
-                <input id = "termsCheckBox" type="checkbox" name="disagree">
+                <input id = "termsCheckBox" type="checkbox" name="agree">
                 I agree to the <a href="#">terms and conditions</a>
                 </label>
             </div>

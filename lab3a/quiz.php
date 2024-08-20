@@ -15,9 +15,11 @@ $complete_name = $_POST['complete_name'];
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];
 $contact_number = $_POST['contact_number'];
+
 $agree = $_POST['agree'];
 $answer = $_POST['answer'] ?? null;
 $answers = $_POST['answers'] ?? null;
+
 if (!is_null($answer)) {
     $answers .= $answer;
 }
