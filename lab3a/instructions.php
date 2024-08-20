@@ -5,13 +5,14 @@
 // Supply the missing code
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
+    // exit;
 }
 
-// Supply the missing code
 $complete_name = $_POST['complete_name'];
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];
 $contact_number = $_POST['contact_number'];
+
 ?>
 <html>
 <head>
@@ -27,16 +28,15 @@ $contact_number = $_POST['contact_number'];
     </h2>
 
     <!-- Supply the correct HTTP method and target form handler resource -->
-    <form method="POST" action="">
+    <form method="POST" action="quiz.php">
         <input type="hidden" value="<?php echo $complete_name; ?>" />
         <input type="hidden" value="<?php echo $email; ?>" />
         <input type="hidden" value="<?php echo $birthdate; ?>" />
         <input type="hidden" value="<?php echo $contact_number; ?>" />
 
-        <!-- Display the instruction -->
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <!-- Display the name -->
+        <!-- <p id="displayName" class="mt-4"></p> -->
+        <p id = "displayName"></p>
 
         <div class="field">
             <label class="label">Terms and conditions</label>
@@ -48,15 +48,25 @@ $contact_number = $_POST['contact_number'];
         <div class="field">
             <div class="control">
                 <label class="checkbox">
-                <input type="checkbox" name="disagree">
+                <input id = "termsCheckBox" type="checkbox" name="disagree">
                 I agree to the <a href="#">terms and conditions</a>
                 </label>
             </div>
         </div>
 
         <!-- Start Quiz button -->
-        <button type="submit" class="button is-link">Start Quiz</button>
+        <button id="startQuizBtn" type="submit" class="button is-link" disabled>Start Quiz</button>
     </form>
+
+    <script>
+        const name = document.getElementById('name').value.trim();
+        document.getElementById('displayName').textContent = `Hello, ${name}! Please read the instructions first.`;
+
+        document.getElementById('termsCheckBox').addEventListener('change', function() {
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            startQuizBtn.disabled = !this.checked;
+        });
+    </script>
 </section>
 
 </body>
