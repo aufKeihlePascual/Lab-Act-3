@@ -35,8 +35,7 @@ $contact_number = $_POST['contact_number'];
         <input type="hidden" value="<?php echo $contact_number; ?>" />
 
         <!-- Display the name -->
-        <!-- <p id="displayName" class="mt-4"></p> -->
-        <p id = "displayName"></p>
+        <h1>Welcome, <strong><?php echo $complete_name; ?></strong>! Please read the instructions first before proceeding.</h1><br>
 
         <div class="field">
             <label class="label">Terms and conditions</label>
@@ -61,13 +60,23 @@ $contact_number = $_POST['contact_number'];
 
     <!-- Start from here -->
     <script>
-        const name = document.getElementById('name').value.trim();
-        document.getElementById('displayName').textContent = `Hello, ${name}! Please read the instructions first.`;
+        const checkbox = document.getElementById('termsCheckBox');
+        const submitBtn = document.getElementById('startQuizBtn');
 
-        document.getElementById('termsCheckBox').addEventListener('change', function() {
-            const startQuizBtn = document.getElementById('startQuizBtn');
-            startQuizBtn.disabled = !this.checked;
-        });
+        function toggleBtn() {
+            if (checkbox.checked) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('disabled');
+                submitBtn.classList.add('enabled');
+            }
+            else {
+                submitBtn.disabled = true;
+                submitBtn.classList.remove('enabled');
+                submitBtn.classList.add('disabled');
+            }
+        }
+        
+        checkbox.addEventListener('change', toggleBtn);
     </script>
 </section>
 
