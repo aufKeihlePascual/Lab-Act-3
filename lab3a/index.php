@@ -11,6 +11,7 @@
     <h2 class="subtitle">
         This is the IPT10 PHP Quiz Web Application Laboratory Activity. Please register
     </h2>
+    
     <!-- Supply the correct HTTP method and target form handler resource -->
     <form method="POST" action="instructions.php">
         <div class="field">
