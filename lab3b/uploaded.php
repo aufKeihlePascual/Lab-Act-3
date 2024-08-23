@@ -6,18 +6,15 @@
             $files = $_FILES['pdffile'];
             $uploaded_files = [];
     
-            // Create upload directory if it doesn't exist
             if (!is_dir($upload_directory)) {
                 mkdir($upload_directory, 0777, true);
             }
     
-            // Check if multiple files are being uploaded
             if (is_array($files['name'])) {
                 foreach ($files['name'] as $key => $name) {
                     $file_tmp_name = $files['tmp_name'][$key];
                     $file_path = $upload_directory . basename($name);
     
-                    // Move uploaded file to the desired directory
                     if (move_uploaded_file($file_tmp_name, $file_path)) {
                         $uploaded_files[] = $relative_path . basename($name);
                     } else {
@@ -25,7 +22,6 @@
                     }
                 }
             } else {
-                // Handle single file upload
                 $file_tmp_name = $files['tmp_name'];
                 $file_path = $upload_directory . basename($files['name']);
                 
@@ -36,11 +32,9 @@
                 }
             }
     
-            // Display uploaded files
             if (!empty($uploaded_files)) {
                 echo '<h1>Uploaded PDF Files</h1>';
                 foreach ($uploaded_files as $file) {
-                    // Check if file exists before trying to display it
                     if (file_exists(getcwd() . '/' . $file)) {
                         echo '<embed src="' . htmlspecialchars($file) . '" type="application/pdf" width="600" height="800"><br>';
                     } else {
