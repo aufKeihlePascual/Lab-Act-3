@@ -24,11 +24,24 @@
     <meta charset="utf-8">
     <title>IPT10 Laboratory Activity #3A</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+
+    <style>
+        .page-title {
+            color: #fff;
+        }
+
+        .size-title {
+            font-size: xx-large;
+            color: #DD761C;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
 <section class="section" style="background-color: #1A4870;">
-    <h1>Quiz Application</h1>
-    <h3>You have 60 seconds to answer all of the questions.</h3>
+    <h1 class="page-title size-title">Quiz Application</h1>
+    <h3 class="page-title">You have 60 seconds to answer all of the questions.</h3><br>
 
     <form method = "POST" action = "result.php" id = "autoSubmit">
         <input type = "hidden" name = "complete_name" value = "<?php echo $complete_name; ?>" />
@@ -55,7 +68,6 @@
             </div>
         <?php endforeach; ?>
 
-        <!-- Start Quiz button -->
         <button type="submit" class="button">Submit</button>
         
     </form>
