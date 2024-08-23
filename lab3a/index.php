@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>IPT10 Laboratory Activity #3A</title>
-    <!-- Add the Bulma CSS here -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"/>
 </head>
 <body>
