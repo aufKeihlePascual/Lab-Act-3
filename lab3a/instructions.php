@@ -5,7 +5,7 @@
 // Supply the missing code
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
-    // exit;
+    exit();
 }
 
 $complete_name = $_POST['complete_name'];
@@ -29,10 +29,11 @@ $contact_number = $_POST['contact_number'];
 
     <!-- Supply the correct HTTP method and target form handler resource -->
     <form method="POST" action="quiz.php">
-        <input type="hidden" value="<?php echo $complete_name; ?>" />
-        <input type="hidden" value="<?php echo $email; ?>" />
-        <input type="hidden" value="<?php echo $birthdate; ?>" />
-        <input type="hidden" value="<?php echo $contact_number; ?>" />
+        <input type="hidden" name = "complete_name" value="<?php echo $complete_name; ?>" />
+        <input type="hidden" name = "email" value="<?php echo $email; ?>" />
+        <input type="hidden" name = "birthdate" value="<?php echo $birthdate; ?>" />
+        <input type="hidden" name = "contact_number" value="<?php echo $contact_number; ?>" />
+        <input type="hidden" name="agree" value="<?php echo $agree; ?>" />
 
         <!-- Display the name -->
         <h1>Welcome, <strong><?php echo $complete_name; ?></strong>! Please read the instructions first before proceeding.</h1><br>
@@ -47,7 +48,7 @@ $contact_number = $_POST['contact_number'];
         <div class="field">
             <div class="control">
                 <label class="checkbox">
-                <input id = "termsCheckBox" type="checkbox" name="agree">
+                <input id = "termsCheckBox" type="checkbox" name="agree" />
                 I agree to the <a href="#">terms and conditions</a>
                 </label>
             </div>
