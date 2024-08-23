@@ -9,7 +9,6 @@
     $complete_name = $_POST['complete_name'];
     $email = $_POST['email'];
     $birthdate = date('F j, Y', strtotime($_POST['birthdate']));
-    
     $contact_number = $_POST['contact_number'];
     $answers = $_POST['answers'] ?? '';
     
@@ -67,7 +66,17 @@
             </table>
         </div>
         
-        <canvas id="confetti-canvas"></canvas>
+        <?php if ($confetti): ?>
+            <canvas id="confetti-canvas"></canvas>
+            <script>
+                var confettiSettings = {
+                    target: 'confetti-canvas'
+                };
+                var confetti = new ConfettiGenerator(confettiSettings);
+                confetti.render();
+            </script>
+        <?php endif; ?>
+        
     </section>
 
     <script>
