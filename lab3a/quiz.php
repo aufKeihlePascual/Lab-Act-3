@@ -30,7 +30,7 @@
     <h1>Quiz Application</h1>
     <h3>You have 60 seconds to answer all of the questions.</h3>
 
-    <form method="POST" action="result.php">
+    <form method = "POST" action = "result.php" id = "autoSubmit">
         <input type = "hidden" name = "complete_name" value = "<?php echo $complete_name; ?>" />
         <input type = "hidden" name = "email" value = "<?php echo $email; ?>" />
         <input type = "hidden" name = "birthdate" value = "<?php echo $birthdate; ?>" />
@@ -61,12 +61,12 @@
     </form>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            document.getElementById('quiz-form').submit();
-        }, 60000);  
-    });
+<script type="text/javascript">
+    function autoSubmitForm() {
+        document.getElementById('autoSubmit').submit();
+    }
+    
+    setTimeout(autoSubmitForm, 60000);
 </script>
 
 </body>
