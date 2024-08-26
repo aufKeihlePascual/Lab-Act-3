@@ -19,12 +19,15 @@
 
 <div class="row--50-50 grid-demo">
   <div class="col">
+    <h4>Image Upload</h4>
     <h4>MP3 File Upload</h4>
 
     <form method="POST" action="uploaded.php" enctype="multipart/form-data">
         <div class="p-card">
+            <h3>Image File Upload</h3>
             <h3>MP3 File</h3>
             <p class="p-card__content">
+              <input type="file" name="jpg_file" accept="image/*"/>
               <input type="file" name="audio_file" accept=".mp3" />
             </p>
         </div>
