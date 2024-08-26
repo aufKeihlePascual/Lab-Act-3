@@ -17,41 +17,44 @@
   </div>
 </div>
 
-<div class="row--50-50 grid-demo">
-  <div class="col">
-    <h4>Different File Types Upload</h4>
 
-    <form method="POST" action="uploaded.php" enctype="multipart/form-data">
-        <div class="p-card">
-            <h3>MP4 Video File Upload</h3>
-            <p class="p-card__content">
-              <input type="file" name="video_file" accept=".mp4"/>
-            </p>
-        </div>
+<form method="post" action="uploaded.php" enctype="multipart/form-data">
+    <div class="p-card">
+      <h3>Text File</h3>
+      <p class="p-card__content">
+          <input type="file" name="text_file[]" accept=".txt" multiple />
+      </p>
+    </div>
+    <div class="p-card">
+      <h3>PDF File</h3>
+      <p class="p-card__content">
+          <input type="file" name="pdf_file[]" accept=".pdf" multiple />
+      </p>
+    </div>
+    <div class="p-card">
+      <h3>Audio File</h3>
+      <p class="p-card__content">
+          <input type="file" name="audio_file[]" accept=".mp3" multiple />
+      </p>
+    </div>
+    <div class="p-card">
+      <h3>Image File</h3>
+      <p class="p-card__content">
+          <input type="file" name="image_file[]" accept="image/*" multiple />
+      </p>
+    </div>
+    <div class="p-card">
+      <h3>Video File</h3>
+      <p class="p-card__content">
+          <input type="file" name="video_file[]" accept=".mp4" multiple />
+      </p>
+    </div>
 
-        <div class="p-card">
-            <h3>Image File Upload</h3>
-            <p class="p-card__content">
-              <input type="file" name="jpg_file" accept="image/*"/>
-            </p>
-        </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
 
-        <div class="p-card">
-            <h3>MP3 File</h3>
-            <p class="p-card__content">
-              <input type="file" name="audio_file" accept=".mp3" />
-            </p>
-        </div>
-
-        <div>
-            <button type = "submit">Upload</button>
-        </div>
-    </form>
-  </div>
-
-  <div class="col">
-    <img class="p-logo-section__logo" src="https://www.auf.edu.ph/home/images/mascot/CCS.png" alt="College of Computing Studies">
-  </div>
+  </form>
 </div>
 
 </body>
