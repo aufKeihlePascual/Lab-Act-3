@@ -1,54 +1,28 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_FILES['pdffile']) && $_FILES['pdffile']['error'] === UPLOAD_ERR_OK) {
-            $upload_directory = getcwd() . '/uploads/';
-            $relative_path = 'uploads/';
-            $files = $_FILES['pdffile'];
-            $uploaded_files = [];
-    
-            if (!is_dir($upload_directory)) {
-                mkdir($upload_directory, 0777, true);
-            }
-    
-            if (is_array($files['name'])) {
-                foreach ($files['name'] as $key => $name) {
-                    $file_tmp_name = $files['tmp_name'][$key];
-                    $file_path = $upload_directory . basename($name);
-    
-                    if (move_uploaded_file($file_tmp_name, $file_path)) {
-                        $uploaded_files[] = $relative_path . basename($name);
-                    } else {
-                        echo 'Failed to upload file: ' . htmlspecialchars($name) . '<br>';
-                    }
-                }
+    $upload_directory = getcwd() . '/uploads/';
+    $relative_path = '/uploads/';
+
+    if (isset($_FILES['image_file'])) {
+        $uploaded_image_file = $upload_directory . basename($_FILES['image_file']['name']);
+        $temporary_image_file = $_FILES['image_file']['tmp_name'];
+        $image_path = $relative_path . basename($_FILES['image_file']['name']);
+
+        $file_mime_type = mime_content_type($temporary_image_file);
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+
+        if (in_array($file_mime_type, $allowed_types)) {
+            if (move_uploaded_file($temporary_image_file, $uploaded_image_file)) {
+                echo "<img src='{$image_path}' alt='Uploaded Image' style='max-width: 100%; height: auto;'>";
+                echo "<br><br>You uploaded the file from: " . $image_path . "<br>";
             } else {
-                $file_tmp_name = $files['tmp_name'];
-                $file_path = $upload_directory . basename($files['name']);
-                
-                if (move_uploaded_file($file_tmp_name, $file_path)) {
-                    $uploaded_files[] = $relative_path . basename($files['name']);
-                } else {
-                    echo 'Failed to upload file: ' . htmlspecialchars($files['name']) . '<br>';
-                }
-            }
-    
-            if (!empty($uploaded_files)) {
-                echo '<h1>Uploaded PDF Files</h1>';
-                foreach ($uploaded_files as $file) {
-                    if (file_exists(getcwd() . '/' . $file)) {
-                        echo '<embed src="' . htmlspecialchars($file) . '" type="application/pdf" width="600" height="800"><br>';
-                    } else {
-                        echo 'File not found: ' . htmlspecialchars($file) . '<br>';
-                    }
-                }
-            } else {
-                echo 'No files were uploaded.';
+                echo 'Failed to upload image file';
             }
         } else {
-            echo 'No files found in the request or an upload error occurred.';
+            echo 'Invalid file type. Please upload a JPEG, PNG, or GIF image.';
         }
-    
-    } else {
-        echo 'Invalid request method.';
+        echo '<pre>';
+        var_dump($_FILES);
+        echo '</pre>';
     }
+    exit;
 ?>
