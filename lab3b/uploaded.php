@@ -1,54 +1,30 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_FILES['pdffile']) && $_FILES['pdffile']['error'] === UPLOAD_ERR_OK) {
-            $upload_directory = getcwd() . '/uploads/';
-            $relative_path = 'uploads/';
-            $files = $_FILES['pdffile'];
-            $uploaded_files = [];
-    
-            if (!is_dir($upload_directory)) {
-                mkdir($upload_directory, 0777, true);
-            }
-    
-            if (is_array($files['name'])) {
-                foreach ($files['name'] as $key => $name) {
-                    $file_tmp_name = $files['tmp_name'][$key];
-                    $file_path = $upload_directory . basename($name);
-    
-                    if (move_uploaded_file($file_tmp_name, $file_path)) {
-                        $uploaded_files[] = $relative_path . basename($name);
-                    } else {
-                        echo 'Failed to upload file: ' . htmlspecialchars($name) . '<br>';
-                    }
-                }
+    $upload_directory = getcwd() . '/uploads/';
+    $relative_path = '/uploads/';
+
+    if (isset($_FILES['video_file'])) {
+        $uploaded_video_file = $upload_directory . basename($_FILES['video_file']['name']);
+        $temporary_video_file = $_FILES['video_file']['tmp_name'];
+        $video_path = $relative_path . basename($_FILES['video_file']['name']);
+        $file_mime_type = mime_content_type($temporary_video_file);
+        $file_extension = pathinfo($uploaded_video_file, PATHINFO_EXTENSION);
+        $allowed_type = 'video/mp4';
+        if ($file_mime_type === $allowed_type && $file_extension === 'mp4') {
+            if (move_uploaded_file($temporary_video_file, $uploaded_video_file)) {
+                echo "<video controls style='max-width: 100%; height: auto;'>
+                        <source src='{$video_path}' type='video/mp4'>
+                    Your browser does not support the video tag.
+                    </video>";
+                echo "<br><br>You uploaded the file from: " . $video_path . "<br>";
             } else {
-                $file_tmp_name = $files['tmp_name'];
-                $file_path = $upload_directory . basename($files['name']);
-                
-                if (move_uploaded_file($file_tmp_name, $file_path)) {
-                    $uploaded_files[] = $relative_path . basename($files['name']);
-                } else {
-                    echo 'Failed to upload file: ' . htmlspecialchars($files['name']) . '<br>';
-                }
-            }
-    
-            if (!empty($uploaded_files)) {
-                echo '<h1>Uploaded PDF Files</h1>';
-                foreach ($uploaded_files as $file) {
-                    if (file_exists(getcwd() . '/' . $file)) {
-                        echo '<embed src="' . htmlspecialchars($file) . '" type="application/pdf" width="600" height="800"><br>';
-                    } else {
-                        echo 'File not found: ' . htmlspecialchars($file) . '<br>';
-                    }
-                }
-            } else {
-                echo 'No files were uploaded.';
+                echo 'Failed to upload video file';
             }
         } else {
-            echo 'No files found in the request or an upload error occurred.';
+            echo 'Invalid file type. Please upload an MP4 video.';
         }
-    
-    } else {
-        echo 'Invalid request method.';
+        echo '<pre>';
+        var_dump($_FILES);
+        echo '</pre>';
     }
+    exit;
 ?>
